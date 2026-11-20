@@ -398,6 +398,8 @@ body.has-edge::before{content:"";position:fixed;left:0;top:0;bottom:0;width:12px
 .ph-cap{font-size:12px;color:#c9c9cf;letter-spacing:.06em}
 /* Dashboard: four panels share one top row at desktop */
 @media(min-width:1001px){.dash-top{grid-template-columns:1.35fr 1fr .62fr .8fr;align-items:stretch}.dash-top>*{min-width:0}.dash-top table{max-width:100%}}
+/* Poster frame: fill the card by height WITHOUT the aspect-ratio rule - the two together manufactured an ~800px width from the row height and blew the row out */
+.dash-top .poster-art{aspect-ratio:auto;height:100%;min-height:180px}
 /* Dashboard My Squad: team photo beside the roster */
 .dash-squad-flex{display:flex;gap:14px;align-items:stretch}
 .dash-squad-flex .roster{flex:1;min-width:0}
