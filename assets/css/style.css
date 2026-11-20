@@ -318,3 +318,5 @@ body.nav-open{overflow:hidden}
 @keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
 #champ-grid>div .ph{transition:border-color .45s ease,box-shadow .45s ease}
 #champ-grid>div.pz-active .ph{border-color:#e01e26;box-shadow:0 0 0 1px #e01e26,0 8px 20px rgba(0,0,0,.45)}
+/* Animations R1 fix: open state for the FAQ answer wrapper (was missing, answers could not expand). */
+.faq-item.pz-open .pz-faq-a{grid-template-rows:1fr}
