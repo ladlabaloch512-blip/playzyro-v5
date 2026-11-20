@@ -192,9 +192,9 @@ table{min-width:560px}
 .header-actions{display:none !important}
 .nav-toggle{display:block;margin-left:auto;flex:none}
 .nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.64);opacity:0;pointer-events:none;transition:opacity .32s ease;z-index:70}
-.mobile-drawer{display:flex;flex-direction:column;position:fixed;top:0;right:0;height:100dvh;width:min(84vw,330px);background:#0d0d0f;border-left:2px solid var(--red-dark);z-index:71;transform:translateX(105%);transition:transform .34s ease;box-shadow:-18px 0 34px rgba(0,0,0,.45);padding:16px 18px 22px;overflow-y:auto}
+.mobile-drawer{display:flex;flex-direction:column;position:fixed;top:0;right:0;height:100dvh;width:min(84vw,330px);background:#0d0d0f;border-left:2px solid var(--red-dark);z-index:71;transform:translateX(105%);visibility:hidden;transition:transform .34s ease,visibility 0s linear .34s;box-shadow:-18px 0 34px rgba(0,0,0,.45);padding:16px 18px 22px;overflow-y:auto}
 body.nav-open .nav-backdrop{opacity:1;pointer-events:auto}
-body.nav-open .mobile-drawer{transform:translateX(0)}
+body.nav-open .mobile-drawer{transform:translateX(0);visibility:visible;transition:transform .34s ease,visibility 0s}
 body.nav-open{overflow:hidden}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:10px}
 .drawer-head span{font-family:var(--head);text-transform:uppercase;font-size:24px;letter-spacing:.6px;color:#fff}
