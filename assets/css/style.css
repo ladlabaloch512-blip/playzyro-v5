@@ -405,10 +405,10 @@ body.has-edge::before{content:"";position:fixed;left:0;top:0;bottom:0;width:12px
 /* Dashboard My Squad: team photo beside the roster */
 .dash-squad-flex{display:flex;gap:14px;align-items:stretch}
 .dash-squad-flex .roster{flex:1;min-width:0}
-.dash-squad-flex .team-photo{flex:0 0 36%;min-height:120px}
-/* V5-Dashboard-R1-01 remainder: roster and photo are separate columns - member names wrap inside the roster column and can never run under the photo */
+.dash-squad-flex .team-photo{flex:0 0 30%;min-height:120px}
+/* V5-Dashboard-R1-01 remainder + R3-01: roster and photo are separate columns; member names sit on ONE line (photo block narrowed to widen the name column; a name can never run under the photo) */
 .dash-squad-flex .member-row{min-width:0}
-.dash-squad-flex .member-row .muted{min-width:0;overflow-wrap:break-word}
+.dash-squad-flex .member-row .muted{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Header identity avatar (dashboard) */
 .pz-avatar{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-family:var(--head);font-weight:700;font-size:14px;vertical-align:middle}
 /* Admin users tools + banned chip */
