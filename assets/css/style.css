@@ -165,7 +165,9 @@ body.nav-open .main-nav{display:flex}
 .t-row{flex-direction:column;align-items:stretch}
 .t-row .ph{position:relative;overflow:hidden;isolation:isolate;width:100%}
 .admin-layout{grid-template-columns:1fr}
-.admin-side{position:static;border-right:none;border-bottom:1px solid var(--line)}
+.admin-side{position:static;border-right:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto;padding:10px 12px}
+.admin-side h2{border-bottom:none;padding:0 10px 0 0;font-size:20px;white-space:nowrap}
+.admin-side a{display:inline-block;margin-top:0;white-space:nowrap;padding:8px 10px;border-left:none;border-bottom:3px solid var(--red)}
 .admin-main{padding:20px 14px 40px}
 .band h1{font-size:38px}
 .cross{left:14px}.cross::after{left:-18px;width:50px}
@@ -269,7 +271,8 @@ body.nav-open{overflow:hidden}
 .stack-table td{display:grid;grid-template-columns:104px 1fr;gap:10px;border-bottom:1px solid var(--line);padding:9px 12px}
 .stack-table tr td:last-child{border-bottom:none}
 .stack-table td::before{content:attr(data-label);font-family:var(--head);text-transform:uppercase;letter-spacing:.5px;color:#ff6b71;font-size:14px}
-.admin-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.admin-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.admin-sec{min-width:0}
 .admin-table-wrap th:first-child,.admin-table-wrap td:first-child{position:sticky;left:0;background:#1b1b1e;z-index:2}
 .admin-table-wrap th:first-child{background:var(--red);z-index:3}
 .scroll-hint{display:block;color:var(--muted);font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.5px}
@@ -318,5 +321,9 @@ body.nav-open{overflow:hidden}
 @keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
 #champ-grid>div .ph{transition:border-color .45s ease,box-shadow .45s ease}
 #champ-grid>div.pz-active .ph{border-color:#e01e26;box-shadow:0 0 0 1px #e01e26,0 8px 20px rgba(0,0,0,.45)}
+/* Animations R1 strengthening (panel ruling 2026-11-20): the rotating champion emphasis must be
+   visible in motion - the active unit also scales slightly, in V5's fast red tuning. */
+#champ-grid>div{transition:transform .45s ease}
+#champ-grid>div.pz-active{transform:scale(1.03);position:relative;z-index:1}
 /* Animations R1 fix: open state for the FAQ answer wrapper (was missing, answers could not expand). */
 .faq-item.pz-open .pz-faq-a{grid-template-rows:1fr}
