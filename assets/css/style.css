@@ -406,6 +406,8 @@ body.has-edge::before{content:"";position:fixed;left:0;top:0;bottom:0;width:12px
 .dash-squad-flex{display:flex;gap:14px;align-items:stretch}
 .dash-squad-flex .roster{flex:1;min-width:0}
 .dash-squad-flex .team-photo{flex:0 0 30%;min-height:120px}
+/* V5-Squad-R1-01 (AI Slop round): the avatar tag in member rows reads whole on ONE line inside its frame (frame widened, tag size set for the row context) */
+.member-row .avatar-ph{width:58px;font-size:9px;white-space:nowrap;letter-spacing:.02em;padding:2px}
 /* V5-Dashboard-R1-01 remainder + R3-01: roster and photo are separate columns; member names sit on ONE line (photo block narrowed to widen the name column; a name can never run under the photo) */
 .dash-squad-flex .member-row{min-width:0}
 .dash-squad-flex .member-row .muted{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
