@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up / Login | PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M10 4h30L22 26h18v14H8L26 18H10z' fill='%23e01e26'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-19a"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -17,19 +20,21 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
 </div>
 </header>
+<div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
+<aside class="mobile-drawer" aria-label="Mobile navigation"><div class="drawer-head"><span>Menu</span><button class="drawer-close" type="button" aria-label="Close menu" onclick="document.body.classList.remove('nav-open')">&times;</button></div><nav class="drawer-nav" onclick="document.body.classList.remove('nav-open')"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav><div class="drawer-auth"><a class="btn btn-outline btn-block" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-block" href="auth.html">Sign Up</a><span class="user-chip" data-user-chip></span></div></aside>
 
 <main class="wrap">
 <div class="auth-grid">
 <div class="auth-left">
 <h1>Join the Battle</h1>
-<div class="ph ph-x" style="min-height:230px">Poster Placeholder</div>
+<div class="ph poster-art" style="min-height:230px"><span>Tournament Poster</span></div>
 <p class="cond" style="font-size:21px;margin:14px 0 20px">Upcoming Tournament</p>
 <div class="split2">
-<div><div class="ph ph-x" style="min-height:150px">Winner Photo Placeholder</div><p class="cond" style="font-size:20px;margin-top:10px">Recent Champion</p><p class="small muted">Winner: To be confirmed</p></div>
-<div><div class="ph ph-x" style="min-height:150px">Team Photo Placeholder</div><p class="cond" style="font-size:20px;margin-top:10px">Featured Team</p><p class="small muted">Team name: Placeholder</p></div>
+<div><div class="ph photo-frame" style="min-height:150px"><span>Winner Photo</span></div><p class="cond" style="font-size:20px;margin-top:10px">Recent Champion</p><p class="small muted">Winner: To be confirmed</p></div>
+<div><div class="ph team-photo" style="min-height:150px"><span>Team Photo</span></div><p class="cond" style="font-size:20px;margin-top:10px">Featured Team</p><p class="small muted">Team name: To be confirmed</p></div>
 </div>
 </div>
 <div class="auth-panel">
@@ -101,7 +106,7 @@
 <p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online at playzyro.xyz.</p></div>
 <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Register / Login</a></div>
 <div class="footer-col"><h4>Players</h4><a href="dashboard.html">Dashboard</a><a href="squad.html">My Squad</a><a href="squad-create.html">Create Squad</a><a href="squad-join.html">Join Squad by Code</a></div>
-<div class="footer-col"><h4>Social</h4><p>Social links: to be provided by the client.</p></div>
+<div class="footer-col"><h4>Contact</h4><p class="contact-line">Contact email: to be provided by the client</p><p>Social links: to be provided by the client.</p></div>
 </div>
 <p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <p class="copyright">&copy; PlayZyro. All rights reserved.</p>

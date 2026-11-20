@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M10 4h30L22 26h18v14H8L26 18H10z' fill='%23e01e26'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-19a"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -17,9 +20,11 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html" class="active">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
 </div>
 </header>
+<div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
+<aside class="mobile-drawer" aria-label="Mobile navigation"><div class="drawer-head"><span>Menu</span><button class="drawer-close" type="button" aria-label="Close menu" onclick="document.body.classList.remove('nav-open')">&times;</button></div><nav class="drawer-nav" onclick="document.body.classList.remove('nav-open')"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html" class="active">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav><div class="drawer-auth"><a class="btn btn-outline btn-block" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-block" href="auth.html">Sign Up</a><span class="user-chip" data-user-chip></span></div></aside>
 
 <section class="band"><div class="cross"></div><div class="band-in"><h1>About <span class="red">Us</span></h1><p>PlayZyro &middot; PUBG Community</p></div></section>
 <main class="wrap page-pad">
@@ -28,6 +33,27 @@
 <p>Players sign up and log in with their own dashboard. A team captain creates a squad of 4 to 5 members, members join through a code, and the squad applies for tournaments through the website, instead of managing everything over WhatsApp.</p>
 <p>The admin panel keeps the community organised: the admin sees every user and team, updates tournaments, adds upcoming events, and selects and assigns teams to tournaments. Assigned teams see their assignment, and the room ID and password at match time, in their own panel.</p>
 <div class="gap-box">More about the PlayZyro community: information to be provided by the client. This section will be completed when that information arrives.</div>
+</div>
+
+<div class="sec-head"><h2>How It <span>Works</span></h2></div>
+<div class="steps-grid">
+<div class="step-card"><p class="num">01</p><h3>Create your account</h3><p>Sign up and log in to your own PlayZyro account.</p></div>
+<div class="step-card"><p class="num">02</p><h3>Build your squad</h3><p>Create a squad as captain, or join one with the squad's join code. A squad holds 4 to 5 players.</p></div>
+<div class="step-card"><p class="num">03</p><h3>Apply for a tournament</h3><p>Squads with at least 4 members can apply from the tournament page.</p></div>
+<div class="step-card"><p class="num">04</p><h3>Get assigned</h3><p>The PlayZyro admin reviews applications and assigns squads. Watch your dashboard for your tournaments.</p></div>
+<div class="step-card"><p class="num">05</p><h3>Play at match time</h3><p>Your Room ID and password are published on your dashboard at match time, visible only to your squad.</p></div>
+</div>
+<div class="sec-head"><h2>Frequently Asked <span>Questions</span></h2></div>
+<div class="faq-grid">
+<div class="faq-item"><h3>What is PlayZyro?</h3><p>PlayZyro runs PUBG community tournaments online: schedules, squads, assignments and winners in one place.</p></div>
+<div class="faq-item"><h3>How many players are in a squad?</h3><p>A squad holds 4 to 5 players. The captain creates the squad and shares its join code.</p></div>
+<div class="faq-item"><h3>How do I join a squad?</h3><p>Ask the captain for the squad's join code, then use Join a Squad while logged in.</p></div>
+<div class="faq-item"><h3>Can I be in more than one squad?</h3><p>In this stage each player has one active squad.</p></div>
+<div class="faq-item"><h3>How does my squad enter a tournament?</h3><p>A squad with at least 4 members applies from the tournament page. The admin assigns squads, and assigned squads see the tournament on their dashboard.</p></div>
+<div class="faq-item"><h3>When do we get the Room ID and password?</h3><p>The admin publishes them at match time. They appear on the dashboard of assigned squad members only.</p></div>
+<div class="faq-item"><h3>Does PlayZyro take payments?</h3><p>No. PlayZyro does not take payments, deposits or withdrawals on this site.</p></div>
+<div class="faq-item"><h3>How are winners announced?</h3><p>Winners from finished tournaments are published in the winners section on this site.</p></div>
+<div class="faq-item"><h3>How do I contact PlayZyro?</h3><p>Contact email: to be provided by the client</p></div>
 </div>
 </main>
 <footer class="site-footer">
@@ -38,7 +64,7 @@
 <p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online at playzyro.xyz.</p></div>
 <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Register / Login</a></div>
 <div class="footer-col"><h4>Players</h4><a href="dashboard.html">Dashboard</a><a href="squad.html">My Squad</a><a href="squad-create.html">Create Squad</a><a href="squad-join.html">Join Squad by Code</a></div>
-<div class="footer-col"><h4>Social</h4><p>Social links: to be provided by the client.</p></div>
+<div class="footer-col"><h4>Contact</h4><p class="contact-line">Contact email: to be provided by the client</p><p>Social links: to be provided by the client.</p></div>
 </div>
 <p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <p class="copyright">&copy; PlayZyro. All rights reserved.</p>

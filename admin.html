@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel | PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M10 4h30L22 26h18v14H8L26 18H10z' fill='%23e01e26'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-19a"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body>
 <header class="site-header">
@@ -17,9 +20,11 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" class="active" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
 </div>
 </header>
+<div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
+<aside class="mobile-drawer" aria-label="Mobile navigation"><div class="drawer-head"><span>Menu</span><button class="drawer-close" type="button" aria-label="Close menu" onclick="document.body.classList.remove('nav-open')">&times;</button></div><nav class="drawer-nav" onclick="document.body.classList.remove('nav-open')"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" class="active" data-admin-link>Admin</a></nav><div class="drawer-auth"><a class="btn btn-outline btn-block" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-block" href="auth.html">Sign Up</a><span class="user-chip" data-user-chip></span></div></aside>
 
 <div class="admin-layout">
 <aside class="admin-side">
@@ -47,11 +52,11 @@
 <div class="admin-grid">
 <section class="admin-sec" id="sec-users">
 <h3>Users</h3>
-<div class="table-wrap"><table style="min-width:420px"><thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th></tr></thead><tbody id="users-body"></tbody></table></div>
+<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th></tr></thead><tbody id="users-body"></tbody></table></div>
 </section>
 <section class="admin-sec" id="sec-squads">
 <h3>Squads</h3>
-<div class="table-wrap"><table style="min-width:520px"><thead><tr><th>Squad Name</th><th>Captain</th><th>Members</th><th>Join Code</th><th>Team Photo</th></tr></thead><tbody id="squads-body"></tbody></table></div>
+<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:520px"><thead><tr><th>Squad Name</th><th>Captain</th><th>Members</th><th>Join Code</th><th>Team Photo</th></tr></thead><tbody id="squads-body"></tbody></table></div>
 </section>
 </div>
 <div class="admin-grid">
@@ -64,7 +69,7 @@
 <div><label class="fl" for="tf-name">Tournament Name</label><input type="text" id="tf-name" required></div>
 <div><label class="fl" for="tf-mode">Format / Mode</label><input type="text" id="tf-mode" placeholder="Squad"></div>
 <div><label class="fl" for="tf-date">Date Text</label><input type="text" id="tf-date" placeholder="Date to be confirmed"></div>
-<div><label class="fl" for="tf-time">Time Text</label><input type="text" id="tf-time" placeholder="Time placeholder"></div>
+<div><label class="fl" for="tf-time">Time Text</label><input type="text" id="tf-time" placeholder="Time to be confirmed"></div>
 <div><label class="fl" for="tf-status">Registration Status</label><select id="tf-status"><option>Registration Open</option><option>Upcoming</option><option>Closed</option><option>Completed</option></select></div>
 <div><label class="fl" for="tf-slots">Slots (optional)</label><input type="text" id="tf-slots"></div>
 </div>
@@ -96,7 +101,7 @@
 </div>
 <section class="admin-sec" id="sec-events">
 <h3>Upcoming Events Manager</h3>
-<div class="table-wrap"><table style="min-width:420px"><thead><tr><th>Event</th><th>Date</th><th>Poster</th></tr></thead><tbody id="events-body"></tbody></table></div>
+<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>Event</th><th>Date</th><th>Poster</th></tr></thead><tbody id="events-body"></tbody></table></div>
 <form id="form-event" autocomplete="off" style="margin-top:16px;max-width:640px">
 <label class="fl" for="ef-title">Event Title</label><input type="text" id="ef-title" required>
 <label class="fl" for="ef-date">Date Text</label><input type="text" id="ef-date" placeholder="Date to be confirmed">
@@ -128,10 +133,10 @@
       return '<tr><td>'+(i+1)+'</td><td>'+E(u.username)+'</td><td>'+E(u.role==='admin'?'Admin':'User')+'</td><td><span class="chip">Active</span></td></tr>';
     }).join('');
     document.getElementById('squads-body').innerHTML=PZ.db.squads.map(function(s){
-      return '<tr><td>'+E(s.name)+'</td><td>'+E(uname(s.captainId))+'</td><td>'+s.memberIds.length+'/5</td><td>'+E(s.joinCode)+'</td><td><span class="mini-ph">Team Photo Placeholder</span></td></tr>';
+      return '<tr><td>'+E(s.name)+'</td><td>'+E(uname(s.captainId))+'</td><td>'+s.memberIds.length+'/5</td><td>'+E(s.joinCode)+'</td><td><span class="mini-ph mini-team">Team Photo</span></td></tr>';
     }).join('')||'<tr><td colspan="5">No squads yet.</td></tr>';
     document.getElementById('tourn-list').innerHTML=PZ.db.tournaments.map(function(t){
-      return '<div class="t-row" style="margin-bottom:10px"><div class="grow"><p class="small muted">Tournament Name</p><h3 style="font-size:21px">'+E(t.name)+'</h3><p>Format: '+E(t.mode)+' &middot; Status: '+E(t.status)+' &middot; '+E(t.dateText)+'</p></div><span class="mini-ph">Poster Placeholder</span><span class="mini-ph">Winner Photo Placeholder</span><button class="btn btn-grey btn-sm" type="button" data-edit-t="'+E(t.id)+'">Edit</button></div>';
+      return '<div class="t-row" style="margin-bottom:10px"><div class="grow"><p class="small muted">Tournament Name</p><h3 style="font-size:21px">'+E(t.name)+'</h3><p>Format: '+E(t.mode)+' &middot; Status: '+E(t.status)+' &middot; '+E(t.dateText)+'</p></div><span class="mini-ph mini-poster">Poster</span><span class="mini-ph mini-photo">Winner Photo</span><button class="btn btn-grey btn-sm" type="button" data-edit-t="'+E(t.id)+'">Edit</button></div>';
     }).join('')||'<p class="empty">No tournaments yet. Create one below.</p>';
     document.querySelectorAll('[data-edit-t]').forEach(function(b){b.addEventListener('click',function(){
       var t=PZ.db.tournaments.find(function(x){return x.id===b.getAttribute('data-edit-t');}); if(!t){return;}
@@ -158,7 +163,7 @@
       return '<p class="small" style="padding:5px 0;border-bottom:1px solid var(--line)">'+E(t?t.name:tid)+': room published</p>';
     }).join('')||'<p class="small muted">No rooms published yet.</p>';
     document.getElementById('events-body').innerHTML=PZ.db.events.map(function(ev){
-      return '<tr><td>'+E(ev.title)+'</td><td>'+E(ev.dateText)+'</td><td><span class="mini-ph">Poster Placeholder</span></td></tr>';
+      return '<tr><td>'+E(ev.title)+'</td><td>'+E(ev.dateText)+'</td><td><span class="mini-ph mini-poster">Poster</span></td></tr>';
     }).join('')||'<tr><td colspan="3">No events yet.</td></tr>';
   }
   render();
@@ -198,7 +203,7 @@
 <p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online at playzyro.xyz.</p></div>
 <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Register / Login</a></div>
 <div class="footer-col"><h4>Players</h4><a href="dashboard.html">Dashboard</a><a href="squad.html">My Squad</a><a href="squad-create.html">Create Squad</a><a href="squad-join.html">Join Squad by Code</a></div>
-<div class="footer-col"><h4>Social</h4><p>Social links: to be provided by the client.</p></div>
+<div class="footer-col"><h4>Contact</h4><p class="contact-line">Contact email: to be provided by the client</p><p>Social links: to be provided by the client.</p></div>
 </div>
 <p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <p class="copyright">&copy; PlayZyro. All rights reserved.</p>
