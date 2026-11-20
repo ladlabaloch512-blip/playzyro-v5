@@ -262,6 +262,7 @@ body.nav-open{overflow:hidden}
 }
 /* mobile tables: public = stacked label/value cards; admin = contained scroll + sticky first column */
 @media (max-width:640px){
+#champ-grid{grid-template-columns:1fr}
 .stats-strip div{padding:12px 6px}
 .stats-strip strong{font-size:25px}
 .stats-strip span{font-size:11px}
