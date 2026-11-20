@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20h">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20g"></script>
+<script src="assets/js/app.js?v=2026-11-20h"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -20,7 +20,7 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html" class="active">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
 </div>
 </header>
 <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
@@ -48,9 +48,9 @@
 <div>
 <div class="sec-head"><h2>Champions <span>&amp; Winners</span></h2></div>
 <div class="panel">
-<div class="ph photo-frame" style="min-height:170px"><span>Winner Photo</span></div>
+<div class="ph photo-frame hz" style="min-height:170px"><span>Winner Photo</span></div>
 <div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Winner</b><span>To be confirmed</span></div></div>
-<div class="ph team-photo" style="min-height:120px;margin-top:14px"><span>Team Photo</span></div>
+<div class="ph team-photo hz" style="min-height:120px;margin-top:14px"><span>Team Photo</span></div>
 <div class="fact-lines"><div class="fact-line"><b>Champion title</b><span>To be confirmed</span></div><div class="fact-line"><b>MVP</b><span>To be confirmed</span></div></div>
 </div>
 </div>
@@ -97,7 +97,7 @@
   document.getElementById('home-schedule').innerHTML=PZ.db.tournaments.map(function(t){
     return '<div class="sched-row"><span>'+E(t.name)+' &middot; '+E(t.dateText)+'</span><span class="chip">'+E(t.status)+'</span></div>';
   }).join('') || '<p class="empty">Schedule to be confirmed.</p>';
-  document.getElementById('home-events').innerHTML=PZ.db.events.map(function(ev){
+  document.getElementById('home-events').innerHTML=PZ.eventsSorted().map(function(ev){
     return '<div class="sched-row ev"><span>'+E(ev.title)+'</span><span class="muted">'+E(ev.dateText)+'</span></div>';
   }).join('') || '<p class="empty">No upcoming events yet.</p>';
 })();

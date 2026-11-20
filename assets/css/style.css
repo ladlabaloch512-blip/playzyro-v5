@@ -373,3 +373,37 @@ label.fl{color:#e6e6e9}
 #champ-grid>div.pz-active{transform:scale(1.03);position:relative;z-index:1}
 /* Animations R1 fix: open state for the FAQ answer wrapper (was missing, answers could not expand). */
 .faq-item.pz-open .pz-faq-a{grid-template-rows:1fr}
+
+/* ===== V5 R1 fix round (Chat 2 Screenshot Match R1, 2026-11-20) ===== */
+/* Hero: flat battlefield scene - smoke tones, soldier silhouettes, embers (slashes removed) */
+.hero{background:radial-gradient(ellipse 55% 85% at 88% 108%,rgba(224,30,38,.16),transparent 62%),radial-gradient(ellipse 60% 75% at 72% -10%,#26262b,transparent 70%),radial-gradient(ellipse 90% 65% at 105% 55%,#1d1d21,transparent 70%),linear-gradient(180deg,#141417 0%,#0d0d0f 68%,#09090b 100%)}
+.embers{background-image:radial-gradient(circle 3px at 84% 26%,rgba(255,140,50,.95),transparent 65%),radial-gradient(circle 2px at 76% 44%,rgba(255,90,40,.9),transparent 65%),radial-gradient(circle 2.5px at 90% 58%,rgba(255,170,70,.9),transparent 65%),radial-gradient(circle 2px at 68% 18%,rgba(255,120,45,.85),transparent 65%),radial-gradient(circle 3px at 94% 36%,rgba(224,30,38,.85),transparent 65%),radial-gradient(circle 2px at 72% 66%,rgba(255,150,60,.8),transparent 65%),radial-gradient(circle 2px at 58% 30%,rgba(255,110,40,.7),transparent 65%),radial-gradient(circle 2.5px at 88% 78%,rgba(255,130,50,.75),transparent 65%),radial-gradient(circle 2px at 64% 52%,rgba(255,160,70,.7),transparent 65%),radial-gradient(circle 2px at 97% 66%,rgba(255,100,40,.8),transparent 65%)}
+.hero-sil{opacity:.55}
+/* Left edge: the design's red double stripe */
+body.has-edge{border-left:12px solid transparent;background-image:linear-gradient(var(--bg),var(--bg)),linear-gradient(90deg,var(--red) 0 4px,transparent 4px 7px,#8f141b 7px 12px);background-origin:padding-box,border-box;background-clip:padding-box,border-box}
+/* Tournaments banner: same scene direction on the right, cross motif kept */
+.band{background:radial-gradient(ellipse 50% 90% at 92% 110%,rgba(224,30,38,.15),transparent 62%),radial-gradient(ellipse 70% 80% at 100% 40%,#1d1d21,transparent 70%),linear-gradient(180deg,#131316 0%,#0c0c0e 100%)}
+.band-sil{position:absolute;right:0;bottom:0;height:100%;opacity:.42;z-index:1}
+.band-in{position:relative;z-index:2}
+/* Hazard-stripe frames (Highlights & Champions, Home + Tournaments) */
+.ph.hz,#champ-grid .ph.photo-frame,#champ-grid .ph.team-photo{border:5px solid #101013;border-image:repeating-linear-gradient(45deg,#e01e26 0 12px,#101013 12px 24px) 5}
+/* Schedule tools */
+.sched-tools{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sched-tools select,.sched-tools input{background:#101013;border:1px solid var(--line);color:#f2f2f4;padding:9px 10px;font:inherit}
+/* Auth photo boxes */
+.auth-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.auth-photos .ph{min-height:120px;flex-direction:column;gap:6px}
+.ph-cap{font-size:12px;color:#c9c9cf;letter-spacing:.06em}
+/* Dashboard: four panels share one top row at desktop */
+@media(min-width:1001px){.dash-top{grid-template-columns:1.35fr 1fr .62fr .8fr;align-items:stretch}}
+/* Dashboard My Squad: team photo beside the roster */
+.dash-squad-flex{display:flex;gap:14px;align-items:stretch}
+.dash-squad-flex .roster{flex:1;min-width:0}
+.dash-squad-flex .team-photo{flex:0 0 36%;min-height:120px}
+/* Header identity avatar (dashboard) */
+.pz-avatar{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-family:var(--head);font-weight:700;font-size:14px;vertical-align:middle}
+/* Admin users tools + banned chip */
+.users-tools{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:14px}
+.users-tools input{background:#101013;border:1px solid var(--line);color:#f2f2f4;padding:9px 10px;font:inherit;min-width:220px}
+.pager{display:flex;gap:10px;align-items:center}
+.chip.ban{background:#3a0d10;color:#ff6b72;border-color:#e01e26}

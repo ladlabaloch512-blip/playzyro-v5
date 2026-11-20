@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20h">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20g"></script>
+<script src="assets/js/app.js?v=2026-11-20h"></script>
 </head>
 <body>
 <header class="site-header">
@@ -20,7 +20,7 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" class="active" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
 </div>
 </header>
 <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
@@ -52,7 +52,17 @@
 <div class="admin-grid">
 <section class="admin-sec" id="sec-users">
 <h3>Users</h3>
-<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th></tr></thead><tbody id="users-body"></tbody></table></div>
+<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="users-body"></tbody></table></div>
+<div class="users-tools"><input type="search" id="users-search" placeholder="Search users by name" aria-label="Search users"><div class="pager"><button class="btn btn-grey btn-sm" type="button" id="users-prev">Prev</button><span id="users-pageinfo" class="small muted"></span><button class="btn btn-grey btn-sm" type="button" id="users-next">Next</button></div></div>
+<form id="form-user" autocomplete="off" style="display:none;margin-top:14px">
+<input type="hidden" id="uf-id">
+<div class="form-grid">
+<div><label class="fl" for="uf-name">Username</label><input type="text" id="uf-name" required></div>
+<div><label class="fl" for="uf-role">Role</label><select id="uf-role"><option value="user">User</option><option value="admin">Admin</option></select></div>
+</div>
+<button class="btn btn-red" type="submit" style="margin-top:12px">Save User</button>
+<button class="btn btn-grey" type="button" id="uf-cancel">Cancel</button>
+</form>
 </section>
 <section class="admin-sec" id="sec-squads">
 <h3>Squads</h3>
@@ -101,7 +111,7 @@
 </div>
 <section class="admin-sec" id="sec-events">
 <h3>Upcoming Events Manager</h3>
-<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>Event</th><th>Date</th><th>Poster</th></tr></thead><tbody id="events-body"></tbody></table></div>
+<p class="scroll-hint">Scroll sideways to see the full table</p><div class="table-wrap admin-table-wrap"><table style="min-width:420px"><thead><tr><th>Event</th><th>Date</th><th>Priority</th><th>Poster</th></tr></thead><tbody id="events-body"></tbody></table></div>
 <form id="form-event" autocomplete="off" style="margin-top:16px;max-width:640px">
 <label class="fl" for="ef-title">Event Title</label><input type="text" id="ef-title" required>
 <label class="fl" for="ef-date">Date Text</label><input type="text" id="ef-date" placeholder="Date to be confirmed">
@@ -129,9 +139,22 @@
     document.getElementById('count-squads').textContent=PZ.db.squads.length;
     document.getElementById('count-tourns').textContent=PZ.db.tournaments.length;
     document.getElementById('count-events').textContent=PZ.db.events.length;
-    document.getElementById('users-body').innerHTML=PZ.db.users.map(function(u,i){
-      return '<tr><td>'+(i+1)+'</td><td>'+E(u.username)+'</td><td>'+E(u.role==='admin'?'Admin':'User')+'</td><td><span class="chip">Active</span></td></tr>';
-    }).join('');
+    var ulist=PZ.db.users.filter(function(u){return !uq||u.username.toLowerCase().indexOf(uq)>=0;});
+    var upages=Math.max(1,Math.ceil(ulist.length/UPER)); if(upage>=upages){upage=upages-1;}
+    document.getElementById('users-body').innerHTML=ulist.slice(upage*UPER,upage*UPER+UPER).map(function(u){
+      var st=u.status==='Banned'?'<span class="chip ban">Banned</span>':'<span class="chip">Active</span>';
+      return '<tr><td>'+(PZ.db.users.indexOf(u)+1)+'</td><td>'+E(u.username)+'</td><td>'+E(u.role==='admin'?'Admin':'User')+'</td><td>'+st+'</td><td><button class="btn btn-grey btn-sm" type="button" data-uedit="'+E(u.id)+'">Edit</button> <button class="btn btn-red btn-sm" type="button" data-uban="'+E(u.id)+'">'+(u.status==='Banned'?'Unban':'Ban')+'</button></td></tr>';
+    }).join('')||'<tr><td colspan="5">No users match the search.</td></tr>';
+    document.getElementById('users-pageinfo').textContent='Page '+(upage+1)+' of '+upages+' · '+ulist.length+' users';
+    document.querySelectorAll('[data-uedit]').forEach(function(b){b.addEventListener('click',function(){
+      var u=PZ.db.users.find(function(x){return x.id===b.getAttribute('data-uedit');}); if(!u){return;}
+      document.getElementById('uf-id').value=u.id; document.getElementById('uf-name').value=u.username; document.getElementById('uf-role').value=(u.role==='admin'?'admin':'user');
+      document.getElementById('form-user').style.display='block'; document.getElementById('uf-name').focus();
+    });});
+    document.querySelectorAll('[data-uban]').forEach(function(b){b.addEventListener('click',function(){
+      var u=PZ.db.users.find(function(x){return x.id===b.getAttribute('data-uban');}); if(!u){return;}
+      u.status=(u.status==='Banned')?'Active':'Banned'; PZ.save(); render(); PZ.toast(u.username+' is now '+u.status+'.');
+    });});
     document.getElementById('squads-body').innerHTML=PZ.db.squads.map(function(s){
       return '<tr><td>'+E(s.name)+'</td><td>'+E(uname(s.captainId))+'</td><td>'+s.memberIds.length+'/5</td><td>'+E(s.joinCode)+'</td><td><span class="mini-ph mini-team">Team Photo</span></td></tr>';
     }).join('')||'<tr><td colspan="5">No squads yet.</td></tr>';
@@ -163,10 +186,26 @@
       return '<p class="small" style="padding:5px 0;border-bottom:1px solid var(--line)">'+E(t?t.name:tid)+': room published</p>';
     }).join('')||'<p class="small muted">No rooms published yet.</p>';
     document.getElementById('events-body').innerHTML=PZ.db.events.map(function(ev){
-      return '<tr><td>'+E(ev.title)+'</td><td>'+E(ev.dateText)+'</td><td><span class="mini-ph mini-poster">Poster</span></td></tr>';
-    }).join('')||'<tr><td colspan="3">No events yet.</td></tr>';
+      var pr=(ev.priority==='High')?'High':'Medium';
+      return '<tr><td>'+E(ev.title)+'</td><td>'+E(ev.dateText)+'</td><td><select data-evpri="'+E(ev.id)+'" aria-label="Event priority"><option'+(pr==='High'?' selected':'')+'>High</option><option'+(pr==='Medium'?' selected':'')+'>Medium</option></select></td><td><span class="mini-ph mini-poster">Poster</span></td></tr>';
+    }).join('')||'<tr><td colspan="4">No events yet.</td></tr>';
+    document.querySelectorAll('[data-evpri]').forEach(function(sel){sel.addEventListener('change',function(){
+      var ev=PZ.db.events.find(function(x){return x.id===sel.getAttribute('data-evpri');}); if(!ev){return;}
+      ev.priority=sel.value; PZ.save(); PZ.toast(ev.title+' priority set to '+sel.value+'. High-priority events list first on the site.');
+    });});
   }
+  var uq='', upage=0, UPER=5;
   render();
+  document.getElementById('users-search').addEventListener('input',function(e){uq=e.target.value.trim().toLowerCase(); upage=0; render();});
+  document.getElementById('users-prev').addEventListener('click',function(){if(upage>0){upage--; render();}});
+  document.getElementById('users-next').addEventListener('click',function(){upage++; render();});
+  document.getElementById('uf-cancel').addEventListener('click',function(){document.getElementById('form-user').style.display='none';});
+  document.getElementById('form-user').addEventListener('submit',function(e){
+    e.preventDefault();
+    var u=PZ.db.users.find(function(x){return x.id===document.getElementById('uf-id').value;}); if(!u){return;}
+    u.username=document.getElementById('uf-name').value.trim()||u.username; u.role=document.getElementById('uf-role').value;
+    PZ.save(); document.getElementById('form-user').style.display='none'; PZ.toast('User saved.'); render();
+  });
   document.getElementById('tf-reset').addEventListener('click',function(){document.getElementById('form-tourn').reset();document.getElementById('tf-id').value='';});
   document.getElementById('form-tourn').addEventListener('submit',function(e){
     e.preventDefault();
@@ -179,7 +218,7 @@
   });
   document.getElementById('form-event').addEventListener('submit',function(e){
     e.preventDefault();
-    PZ.db.events.push({id:'e'+Math.random().toString(36).slice(2,8).toUpperCase(),title:document.getElementById('ef-title').value.trim(),dateText:document.getElementById('ef-date').value.trim()||'Date to be confirmed'});
+    PZ.db.events.push({id:'e'+Math.random().toString(36).slice(2,8).toUpperCase(),title:document.getElementById('ef-title').value.trim(),dateText:document.getElementById('ef-date').value.trim()||'Date to be confirmed',priority:'Medium'});
     PZ.save(); document.getElementById('form-event').reset(); PZ.toast('Event added.'); render();
   });
   document.getElementById('as-btn').addEventListener('click',function(){

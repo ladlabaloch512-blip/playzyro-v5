@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20h">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20g"></script>
+<script src="assets/js/app.js?v=2026-11-20h"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -20,7 +20,7 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register</a></div>
 </div>
 </header>
 <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
@@ -28,6 +28,7 @@
 
 <section class="band">
 <div class="cross"></div>
+<svg class="band-sil" viewBox="0 0 300 300" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="#000"><path d="M60 300V190l14-52 10-34h12l10 34 12 52v110z"/><circle cx="90" cy="86" r="16"/><path d="M150 300V200l12-44 10-30h12l10 30 12 44v100z"/><circle cx="178" cy="108" r="15"/><path d="M228 300v-92l10-38 8-26h11l9 26 10 38v92z"/><circle cx="252" cy="128" r="13"/><path d="M40 210l60-24M196 176l54-30" stroke="#000" stroke-width="7"/></g></svg>
 <div class="band-in">
 <h1><span class="red">PlayZyro Tournaments</span> &amp;<br>Schedule &amp; Events</h1>
 <p>Sign up, build your squad, and apply for tournaments.</p>
@@ -38,7 +39,7 @@
 <div class="sec-head"><h2>Upcoming <span>Tournaments</span></h2></div>
 <div id="tourn-rows"></div>
 <noscript><p class="muted">Tournament list loads from the site data. Enable JavaScript to view and apply.</p></noscript>
-<div class="sec-head" id="schedule"><h2>Weekly <span>Schedule</span></h2></div>
+<div class="sec-head" id="schedule"><h2>Weekly <span>Schedule</span></h2><div class="sched-tools"><label class="fl" for="sched-filter" style="margin:0">Filter</label><select id="sched-filter"></select><input type="search" id="sched-search" placeholder="Search events" aria-label="Search schedule"></div></div>
 <div class="table-wrap public-table-wrap"><table class="stack-table">
 <thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Mode</th><th>Status</th></tr></thead>
 <tbody id="sched-body"></tbody>
@@ -66,9 +67,17 @@
   document.getElementById('tourn-rows').innerHTML=PZ.db.tournaments.map(function(t){
     return '<article class="t-row"><div class="ph poster-art"><span>Tournament Poster</span></div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode <span class="mv">'+E(t.mode)+'</span></p><p>Prize Pool <span class="mv">To be confirmed</span></p><p>Date <span class="mv">'+E(t.dateText)+'</span></p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
   }).join('') || '<p class="empty">No tournaments yet. Tournaments added by the admin will appear here.</p>';
-  document.getElementById('sched-body').innerHTML=PZ.db.tournaments.map(function(t){
-    return '<tr><td data-label="Date">'+E(t.dateText)+'</td><td data-label="Time">'+E(t.timeText||'Time to be confirmed')+'</td><td data-label="Event">'+E(t.name)+'</td><td data-label="Mode">'+E(t.mode)+'</td><td data-label="Status"><span class="chip'+(t.status==='Registration Open'?' fill':'')+'">'+E(t.status)+'</span></td></tr>';
-  }).join('') || '<tr><td data-label="Schedule" colspan="5">Schedule to be confirmed.</td></tr>';
+  var sf=document.getElementById('sched-filter'), ss=document.getElementById('sched-search');
+  var statuses=[]; PZ.db.tournaments.forEach(function(t){ if(statuses.indexOf(t.status)<0){statuses.push(t.status);} });
+  sf.innerHTML='<option value="">All Statuses</option>'+statuses.map(function(s){return '<option>'+E(s)+'</option>';}).join('');
+  function renderSched(){
+    var f=sf.value, q=(ss.value||'').toLowerCase();
+    var rows=PZ.db.tournaments.filter(function(t){ return (!f||t.status===f) && (!q||t.name.toLowerCase().indexOf(q)>=0); });
+    document.getElementById('sched-body').innerHTML=rows.map(function(t){
+      return '<tr><td data-label="Date">'+E(t.dateText)+'</td><td data-label="Time">'+E(t.timeText||'Time to be confirmed')+'</td><td data-label="Event">'+E(t.name)+'</td><td data-label="Mode">'+E(t.mode)+'</td><td data-label="Status"><span class="chip'+(t.status==='Registration Open'?' fill':'')+'">'+E(t.status)+'</span></td></tr>';
+    }).join('') || '<tr><td data-label="Schedule" colspan="5">No schedule rows match the current filter.</td></tr>';
+  }
+  sf.addEventListener('change',renderSched); ss.addEventListener('input',renderSched); renderSched();
 })();
 </script>
 <footer class="site-footer">

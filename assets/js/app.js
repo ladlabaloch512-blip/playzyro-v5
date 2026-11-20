@@ -51,6 +51,7 @@ window.PZ_VERSION = '2026-11-20c';
     login: function (who, pass) {
       var u = PZ.db.users.find(function (x) { return (x.username.toLowerCase() === String(who).toLowerCase() || x.email.toLowerCase() === String(who).toLowerCase()) && x.pass === pass; });
       if (!u) return null;
+      if (u.status === 'Banned') return null;
       try { localStorage.setItem(SKEY, u.id); } catch (e) {}
       return u;
     },
@@ -114,11 +115,14 @@ window.PZ_VERSION = '2026-11-20c';
       setTimeout(function () { t.classList.remove('show'); setTimeout(function () { t.remove(); }, 300); }, 3200);
     },
     requireAuth: function () { var u = PZ.session(); if (!u) { location.href = 'auth.html?next=' + encodeURIComponent(location.pathname.split('/').pop()); return null; } return u; },
+    eventsSorted: function () {
+      return PZ.db.events.slice().sort(function (a, b) { var pa = (a.priority === 'High') ? 0 : 1, pb = (b.priority === 'High') ? 0 : 1; return pa - pb; });
+    },
     mountUserChip: function () {
       var u = PZ.session();
       document.querySelectorAll('[data-user-chip]').forEach(function (el) {
         if (u) { el.innerHTML = PZ.esc(u.username) + ' &nbsp;<a href="#" data-logout style="color:inherit;text-decoration:underline">Log out</a>'; }
-        else { el.innerHTML = '<a href="auth.html" style="color:inherit">Log in / Sign up</a>'; }
+        else { el.innerHTML = ''; }
       });
       document.querySelectorAll('.header-actions a.btn, .drawer-auth a.btn').forEach(function (a) { a.style.display = u ? 'none' : ''; });
       document.querySelectorAll('[data-logout]').forEach(function (el) { el.addEventListener('click', function (e) { e.preventDefault(); PZ.logout(); }); });

@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20h">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20g"></script>
+<script src="assets/js/app.js?v=2026-11-20h"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -20,7 +20,7 @@
 <span class="logo-word">PLAY<span>ZYRO</span></span></a>
 <button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
 <nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
-<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-outline btn-sm" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-sm" href="auth.html">Sign Up</a></div>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
 </div>
 </header>
 <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
@@ -64,7 +64,7 @@
       var role=(mid===squad.captainId)?'Captain':'Member 0'+i;
       return '<div class="member-row"><span class="avatar-ph">'+E(m.username.charAt(0).toUpperCase())+'</span><span class="role">'+E(role)+'</span><span class="muted small">'+E(m.username)+'</span></div>';
     }).join('');
-    sq.innerHTML=rows+'<div class="ph team-photo" style="min-height:96px;margin-top:12px"><span>Team Photo</span></div>'
+    sq.innerHTML='<div class="dash-squad-flex"><div class="roster">'+rows+'</div><div class="ph team-photo"><span>Team Photo</span></div></div>'
       +'<p class="join-code">Squad Join Code: <b>'+E(squad.joinCode)+'</b> <button class="btn btn-grey btn-sm" type="button" id="copy-code">Copy</button></p>'
       +'<p class="small muted" style="margin-top:8px">'+E(squad.name)+' &middot; '+squad.memberIds.length+' of 5 members &middot; Captain: '+E(captain?captain.username:'')+'</p>'
       +'<a class="btn btn-outline btn-sm" href="squad.html" style="margin-top:12px">View My Squad</a>';
@@ -82,7 +82,7 @@
   } else {
     room.innerHTML=mine.map(function(t){
       var r=PZ.roomFor(user,t.id);
-      if(r){return '<div class="room-box"><p class="small muted">'+E(t.name)+'</p><p>Room ID:</p><p class="rv">'+E(r.roomId)+'</p><p style="margin-top:8px">Password:</p><p class="rv">'+E(r.password)+'</p></div>';}
+      if(r){return '<div class="room-box"><p class="small muted">'+E(t.name)+'</p><p>Room ID:</p><p class="rv">'+E(r.roomId)+'</p><p style="margin-top:8px">Password:</p><p class="rv">'+E(r.password)+'</p><button class="btn btn-red btn-block" type="button" style="margin-top:12px">Match Now</button></div>';}
       return '<div class="room-box"><p class="small muted">'+E(t.name)+'</p><p class="cond" style="font-size:19px">Reveals at match time</p></div>';
     }).join('');
   }
@@ -114,6 +114,9 @@
 </footer>
 <script>
 (function(){var u=PZ.session();document.querySelectorAll('[data-admin-link]').forEach(function(a){if(!u||u.role!=='admin'){a.style.display='none';}});})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){var chip=document.querySelector('.header-actions [data-user-chip]');if(!chip||!chip.querySelector('[data-logout]'))return;var name=document.getElementById('dash-user').textContent;chip.innerHTML='<span class="pz-avatar">'+PZ.esc(name.charAt(0).toUpperCase())+'</span> '+PZ.esc(name)+' &nbsp;<a href="#" id="d-logout" style="color:inherit;text-decoration:underline">Log out</a>';document.getElementById('d-logout').addEventListener('click',function(e){e.preventDefault();PZ.logout();});});
 </script>
 </body>
 </html>
