@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tournaments and Schedule | PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M10 4h30L22 26h18v14H8L26 18H10z' fill='%23e01e26'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19a">
+<script>window.PZ_VARIANT = 'v5';</script>
+<script src="assets/js/app.js?v=2026-11-19a"></script>
+</head>
+<body class="has-edge">
+<header class="site-header">
+<div class="header-in">
+<a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg viewBox="0 0 48 48" class="logo-mark" aria-hidden="true"><path d="M10 4h30L22 26h18v14H8L26 18H10z" fill="#e01e26"/><path d="M33 2L25 16M41 4L33 18M31 28l-7 12" stroke="#0a0a0b" stroke-width="3.4" stroke-linecap="round"/></svg>
+<span class="logo-word">PLAY<span>ZYRO</span></span></a>
+<button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+<nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
+</div>
+</header>
+
+<section class="band">
+<div class="cross"></div>
+<div class="band-in">
+<h1><span class="red">PlayZyro Tournaments</span> &amp;<br>Schedule &amp; Events</h1>
+<p>Sign up, build your squad, and apply for tournaments.</p>
+<a class="btn btn-red" href="#schedule">View Schedule</a>
+</div>
+</section>
+<main class="wrap">
+<div class="sec-head"><h2>Upcoming <span>Tournaments</span></h2></div>
+<div id="tourn-rows"></div>
+<noscript><p class="muted">Tournament list loads from the site data. Enable JavaScript to view and apply.</p></noscript>
+<div class="sec-head" id="schedule"><h2>Weekly <span>Schedule</span></h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Date</th><th>Time</th><th>Event</th><th>Mode</th><th>Status</th></tr></thead>
+<tbody id="sched-body"></tbody>
+</table></div>
+<div class="sec-head"><h2>Highlights <span>&amp; Champions</span></h2></div>
+<div class="cards3" style="grid-template-columns:repeat(4,1fr)" id="champ-grid">
+<div><div class="ph ph-x">Winner Photo Placeholder</div><p class="small muted" style="margin-top:8px">Winner: To be confirmed</p></div>
+<div><div class="ph ph-x">Team Photo Placeholder</div><p class="small muted" style="margin-top:8px">Team name: Placeholder</p></div>
+<div><div class="ph ph-x">Winner Photo Placeholder</div><p class="small muted" style="margin-top:8px">Winner: To be confirmed</p></div>
+<div><div class="ph ph-x">Team Photo Placeholder</div><p class="small muted" style="margin-top:8px">Team name: Placeholder</p></div>
+</div>
+</main>
+<style>@media (max-width:760px){#champ-grid{grid-template-columns:1fr !important}}</style>
+<script>
+(function(){
+  var E=PZ.esc;
+  document.getElementById('tourn-rows').innerHTML=PZ.db.tournaments.map(function(t){
+    return '<article class="t-row"><div class="ph">Poster Placeholder</div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode: '+E(t.mode)+'</p><p>Prize Pool: Placeholder</p><p>Date: '+E(t.dateText)+'</p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
+  }).join('') || '<p class="empty">No tournaments yet. Tournaments added by the admin will appear here.</p>';
+  document.getElementById('sched-body').innerHTML=PZ.db.tournaments.map(function(t){
+    return '<tr><td>'+E(t.dateText)+'</td><td>'+E(t.timeText||'Time placeholder')+'</td><td>'+E(t.name)+'</td><td>'+E(t.mode)+'</td><td><span class="chip">'+E(t.status)+'</span></td></tr>';
+  }).join('') || '<tr><td colspan="5">Schedule to be confirmed.</td></tr>';
+})();
+</script>
+<footer class="site-footer">
+<div class="footer-in">
+<div class="footer-col footer-brand"><a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg viewBox="0 0 48 48" class="logo-mark" aria-hidden="true"><path d="M10 4h30L22 26h18v14H8L26 18H10z" fill="#e01e26"/><path d="M33 2L25 16M41 4L33 18M31 28l-7 12" stroke="#0a0a0b" stroke-width="3.4" stroke-linecap="round"/></svg>
+<span class="logo-word">PLAY<span>ZYRO</span></span></a>
+<p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online at playzyro.xyz.</p></div>
+<div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Register / Login</a></div>
+<div class="footer-col"><h4>Players</h4><a href="dashboard.html">Dashboard</a><a href="squad.html">My Squad</a><a href="squad-create.html">Create Squad</a><a href="squad-join.html">Join Squad by Code</a></div>
+<div class="footer-col"><h4>Social</h4><p>Social links: to be provided by the client.</p></div>
+</div>
+<p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<p class="copyright">&copy; PlayZyro. All rights reserved.</p>
+</footer>
+<script>
+(function(){var u=PZ.session();document.querySelectorAll('[data-admin-link]').forEach(function(a){if(!u||u.role!=='admin'){a.style.display='none';}});})();
+</script>
+</body>
+</html>

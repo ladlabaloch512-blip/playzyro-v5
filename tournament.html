@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tournament Details | PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M10 4h30L22 26h18v14H8L26 18H10z' fill='%23e01e26'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19a">
+<script>window.PZ_VARIANT = 'v5';</script>
+<script src="assets/js/app.js?v=2026-11-19a"></script>
+</head>
+<body class="has-edge">
+<header class="site-header">
+<div class="header-in">
+<a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg viewBox="0 0 48 48" class="logo-mark" aria-hidden="true"><path d="M10 4h30L22 26h18v14H8L26 18H10z" fill="#e01e26"/><path d="M33 2L25 16M41 4L33 18M31 28l-7 12" stroke="#0a0a0b" stroke-width="3.4" stroke-linecap="round"/></svg>
+<span class="logo-word">PLAY<span>ZYRO</span></span></a>
+<button class="nav-toggle" type="button" aria-label="Open menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+<nav class="main-nav"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav>
+<div class="header-actions"><span class="user-chip" data-user-chip></span><a class="btn btn-red btn-sm" href="auth.html">Register / Login</a></div>
+</div>
+</header>
+
+<main class="wrap page-pad">
+<div id="t-main"></div>
+</main>
+<script>
+(function(){
+  var E=PZ.esc;
+  var id=PZ.qs('id')||'t1';
+  var t=PZ.db.tournaments.find(function(x){return x.id===id;});
+  var box=document.getElementById('t-main');
+  if(!t){box.innerHTML='<p class="empty">Tournament not found. <a href="tournaments.html" style="text-decoration:underline">Back to tournaments</a>.</p>';return;}
+  var user=PZ.session();
+  var squad=user?PZ.mySquad(user.id):null;
+  var applied=squad&&PZ.db.applications.some(function(a){return a.squadId===squad.id&&a.tournamentId===t.id;});
+  var assigned=squad&&PZ.isAssigned(squad.id,t.id);
+  var room=user?PZ.roomFor(user,t.id):null;
+  var html='<div class="sec-head" style="margin-top:6px"><h2>'+E(t.name)+'</h2></div>'
+    +'<div class="split2"><div class="ph" style="min-height:260px">[ Poster Placeholder ]</div>'
+    +'<section class="dash-card"><h3>Tournament Details</h3>'
+    +'<p>Mode: '+E(t.mode)+'</p><p>Date: '+E(t.dateText)+'</p><p>Time: '+E(t.timeText||'Time placeholder')+'</p><p>Prize Pool: Placeholder</p>'
+    +'<p>Status: <span class="chip">'+E(t.status)+'</span></p>'
+    +'<p class="muted" style="margin-top:10px">Squad tournament for the PlayZyro PUBG community. Apply with your squad: a squad needs at least 4 members to apply.</p></section></div>'
+    +'<div class="sec-head"><h2>Apply for this <span>Tournament</span></h2></div><div class="content-card" style="max-width:none">';
+  if(!user){
+    html+='<p>You need an account and a squad to apply.</p><a class="btn btn-red" href="auth.html?next='+encodeURIComponent('tournament.html?id='+t.id)+'">Log In / Sign Up</a>';
+  } else if(!squad){
+    html+='<p>You are not in a squad yet.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-red btn-sm" href="squad-create.html">Create Squad</a><a class="btn btn-outline btn-sm" href="squad-join.html">Join Squad by Code</a></div>';
+  } else if(assigned){
+    html+='<p>Your squad <b>'+E(squad.name)+'</b> is assigned to this tournament.</p>';
+  } else if(applied){
+    html+='<p>Your squad <b>'+E(squad.name)+'</b> has applied for this tournament. Application status: Pending. The admin selects and assigns teams.</p>';
+  } else {
+    html+='<p>Applying as squad <b>'+E(squad.name)+'</b> ('+squad.memberIds.length+' of 5 members).</p><div class="form-msg" id="ap-msg"></div><button class="btn btn-red" type="button" id="apply-btn">Apply with My Squad</button>';
+  }
+  html+='</div>';
+  html+='<div class="sec-head"><h2>Room ID <span>&amp; Password</span></h2></div><div class="content-card" style="max-width:none">';
+  if(room){
+    html+='<div class="room-box"><p>Room ID:</p><p class="rv">'+E(room.roomId)+'</p><p style="margin-top:8px">Password:</p><p class="rv">'+E(room.password)+'</p></div>';
+  } else {
+    html+='<p class="cond" style="font-size:21px">Reveals at match time</p><p class="muted">Room details are shown here to the assigned squad when the admin publishes them.</p>';
+  }
+  html+='</div>';
+  var appliedSquads=PZ.appliedSquadIds(t.id).map(function(sid){var s=PZ.db.squads.find(function(x){return x.id===sid;});return s?s.name:null;}).filter(Boolean);
+  html+='<div class="sec-head"><h2>Squads <span>Applied</span></h2></div>';
+  html+=appliedSquads.length?'<div class="sched-list">'+appliedSquads.map(function(n){return '<div class="sched-row"><span>'+E(n)+'</span></div>';}).join('')+'</div>':'<p class="empty">No squads have applied yet.</p>';
+  box.innerHTML=html;
+  var btn=document.getElementById('apply-btn');
+  if(btn){btn.addEventListener('click',function(){
+    var r=PZ.apply(squad,t.id);
+    var m=document.getElementById('ap-msg');
+    if(r.error){m.textContent=r.error;m.style.display='block';m.className='form-msg';return;}
+    PZ.toast('Application sent for '+t.name+'.');
+    location.reload();
+  });}
+})();
+</script>
+<footer class="site-footer">
+<div class="footer-in">
+<div class="footer-col footer-brand"><a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg viewBox="0 0 48 48" class="logo-mark" aria-hidden="true"><path d="M10 4h30L22 26h18v14H8L26 18H10z" fill="#e01e26"/><path d="M33 2L25 16M41 4L33 18M31 28l-7 12" stroke="#0a0a0b" stroke-width="3.4" stroke-linecap="round"/></svg>
+<span class="logo-word">PLAY<span>ZYRO</span></span></a>
+<p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online at playzyro.xyz.</p></div>
+<div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Register / Login</a></div>
+<div class="footer-col"><h4>Players</h4><a href="dashboard.html">Dashboard</a><a href="squad.html">My Squad</a><a href="squad-create.html">Create Squad</a><a href="squad-join.html">Join Squad by Code</a></div>
+<div class="footer-col"><h4>Social</h4><p>Social links: to be provided by the client.</p></div>
+</div>
+<p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<p class="copyright">&copy; PlayZyro. All rights reserved.</p>
+</footer>
+<script>
+(function(){var u=PZ.session();document.querySelectorAll('[data-admin-link]').forEach(function(a){if(!u||u.role!=='admin'){a.style.display='none';}});})();
+</script>
+</body>
+</html>
