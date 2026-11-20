@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20b">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20a"></script>
+<script src="assets/js/app.js?v=2026-11-20b"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -62,7 +62,7 @@
     html+='<p>Applying as squad <b>'+E(squad.name)+'</b> ('+squad.memberIds.length+' of 5 members).</p><div class="form-msg" id="ap-msg"></div><button class="btn btn-red" type="button" id="apply-btn">Apply with My Squad</button>';
   }
   html+='</div>';
-  html+='<div class="sec-head"><h2>Rules From <span>Scope</span></h2></div><div class="content-card" style="max-width:none"><ul class="rules-list"><li>A squad has 4 to 5 players.</li><li>Each player has one active squad in this stage.</li><li>Applications are reviewed by the admin, who selects and assigns squads.</li><li>The Room ID and password are published at match time to assigned squads only.</li><li>Fair play and respectful conduct apply, as set out in the Terms and Conditions.</li></ul></div>';
+  html+='<div class="sec-head"><h2>Rules</h2></div><div class="content-card" style="max-width:none"><ul class="rules-list"><li>A squad has 4 to 5 players.</li><li>Each player has one active squad.</li><li>Applications are reviewed by the admin, who selects and assigns squads.</li><li>The Room ID and password are published at match time to assigned squads only.</li><li>Fair play and respectful conduct apply, as set out in the Terms and Conditions.</li></ul></div>';
   html+='<div class="sec-head"><h2>Room ID <span>&amp; Password</span></h2></div><div class="content-card" style="max-width:none">';
   if(room){
     html+='<div class="room-box"><p>Room ID:</p><p class="rv">'+E(room.roomId)+'</p><p style="margin-top:8px">Password:</p><p class="rv">'+E(room.password)+'</p></div>';

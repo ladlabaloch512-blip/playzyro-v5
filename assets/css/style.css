@@ -287,3 +287,34 @@ body.nav-open{overflow:hidden}
 .demo-notice{margin-top:10px;padding:10px 20px}
 .copyright{padding:8px 20px 20px}
 @media (max-width:760px){.footer-in{grid-template-columns:1fr 1fr;gap:18px}}
+
+/* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
+   Rules: content visible on load, entrance starts from visible, no scroll-reveal,
+   animations are never gated on any motion preference setting. */
+.btn{transition:background-color .16s ease,color .16s ease,border-color .16s ease,transform .12s ease}
+.btn:active{transform:scale(.98)}
+.main-nav a,nav.main a,.drawer-nav a{transition:color .15s ease,background-color .15s ease}
+@keyframes pzHero{from{transform:translateY(8px) scale(.99);opacity:.92}to{transform:translateY(0) scale(1);opacity:1}}
+.hero{animation:pzHero .38s ease-out}
+
+@media (hover:hover) and (pointer:fine){
+  .t-card,.step-card,.why-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .t-card:hover,.step-card:hover,.why-card:hover{transform:translateY(-3px);border-color:#e01e26;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+}
+.pz-prog{height:3px;background:#2c2c30;margin-top:10px;overflow:hidden}
+.pz-prog i{display:block;height:100%;width:0;background:#e01e26;transition:width .3s ease}
+
+.pz-faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pz-chev{flex:none;color:#e01e26;font-size:22px;line-height:1;transition:transform .26s ease}
+.pz-chev::after{content:"+"}
+.pz-open .pz-chev{transform:rotate(45deg)}
+.pz-faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}
+.pz-faq-in{overflow:hidden;min-height:0}
+.pz-msg-in{animation:pzMsg .2s ease-out}
+@keyframes pzMsg{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.pz-swap{animation:pzSwap .16s ease-out}
+@keyframes pzSwap{from{opacity:.45}to{opacity:1}}
+.pz-reveal{animation:pzReveal .5s ease-out}
+@keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
+#champ-grid>div .ph{transition:border-color .45s ease,box-shadow .45s ease}
+#champ-grid>div.pz-active .ph{border-color:#e01e26;box-shadow:0 0 0 1px #e01e26,0 8px 20px rgba(0,0,0,.45)}
