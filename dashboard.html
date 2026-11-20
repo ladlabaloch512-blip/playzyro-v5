@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20f">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20f"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -62,7 +62,7 @@
     var rows=squad.memberIds.map(function(mid,i){
       var m=PZ.user(mid); if(!m){return '';}
       var role=(mid===squad.captainId)?'Captain':'Member 0'+i;
-      return '<div class="member-row"><span class="avatar-ph">Avatar frame</span><span class="role">'+E(role)+'</span><span class="muted small">'+E(m.username)+'</span></div>';
+      return '<div class="member-row"><span class="avatar-ph">'+E(m.username.charAt(0).toUpperCase())+'</span><span class="role">'+E(role)+'</span><span class="muted small">'+E(m.username)+'</span></div>';
     }).join('');
     sq.innerHTML=rows+'<div class="ph team-photo" style="min-height:96px;margin-top:12px"><span>Team Photo</span></div>'
       +'<p class="join-code">Squad Join Code: <b>'+E(squad.joinCode)+'</b> <button class="btn btn-grey btn-sm" type="button" id="copy-code">Copy</button></p>'
@@ -88,7 +88,7 @@
   }
   var dt=document.getElementById('dash-tourns');
   if(!mine.length){
-    dt.innerHTML='<p class="empty">No tournaments yet. <a href="tournaments.html" style="text-decoration:underline">Browse tournaments</a> and apply with your squad.</p>';
+    dt.innerHTML='<p class="empty">No tournaments yet. Browse tournaments and apply with your squad. <a class="btn btn-outline btn-sm" href="tournaments.html" style="margin-left:8px">Browse Tournaments</a></p>';
   } else {
     dt.innerHTML=mine.map(function(t){
       var st='Applied';

@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20f">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20f"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -29,7 +29,8 @@
 <main class="wrap page-pad">
 <div class="sec-head" style="margin-top:6px"><h2>Create <span>Squad</span></h2></div>
 <div class="content-card">
-<p>A captain creates the squad. You will be the captain. The site generates a join code you can share with your players. A squad has 4 to 5 members, and a squad needs at least 4 members to apply for a tournament. One active squad per user.</p>
+<div class="split2">
+<div>
 <div class="form-msg" id="cs-msg"></div>
 <form id="form-create" autocomplete="off">
 <label class="fl" for="cs-name">Squad Name</label>
@@ -37,6 +38,17 @@
 <button class="btn btn-red btn-block" type="submit" style="margin-top:18px">Create Squad</button>
 </form>
 <p class="small muted" style="margin-top:14px">Already have a code from a captain? <a href="squad-join.html" style="text-decoration:underline">Join a squad by code</a>.</p>
+</div>
+<div>
+<h3 style="margin-bottom:10px">Before You Create</h3>
+<ul class="rules-list">
+<li>A captain creates the squad, and you will be the captain.</li>
+<li>The site generates a join code you can share with your players.</li>
+<li>A squad has 4 to 5 members, and a squad needs at least 4 members to apply for a tournament.</li>
+<li>One active squad per user.</li>
+</ul>
+</div>
+</div>
 </div>
 </main>
 <script>

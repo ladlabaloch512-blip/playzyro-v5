@@ -120,6 +120,7 @@ window.PZ_VERSION = '2026-11-20c';
         if (u) { el.innerHTML = PZ.esc(u.username) + ' &nbsp;<a href="#" data-logout style="color:inherit;text-decoration:underline">Log out</a>'; }
         else { el.innerHTML = '<a href="auth.html" style="color:inherit">Log in / Sign up</a>'; }
       });
+      document.querySelectorAll('.header-actions a.btn, .drawer-auth a.btn').forEach(function (a) { a.style.display = u ? 'none' : ''; });
       document.querySelectorAll('[data-logout]').forEach(function (el) { el.addEventListener('click', function (e) { e.preventDefault(); PZ.logout(); }); });
     }
   };
@@ -151,7 +152,6 @@ ready(function(){
       if(p && !p.closest('.pz-faq-a')){var w=document.createElement('div');w.className='pz-faq-a';var inn=document.createElement('div');inn.className='pz-faq-in';p.parentNode.insertBefore(w,p);w.appendChild(inn);inn.appendChild(p);}
       var w2=wrapOf(it); if(!w2)return;
       w2.style.display='block'; w2.style.overflow='hidden'; w2.style.height='0px';
-      if(idx===0){it.classList.add('pz-open'); w2.style.height=innerOf(it).scrollHeight+'px';}
       h.addEventListener('click',function(){
         var open=it.classList.contains('pz-open');
         items.forEach(function(o){ if(o!==it && o.classList.contains('pz-open')){ o.classList.remove('pz-open'); slide(o,0);} });

@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20f">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20f"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -40,7 +40,7 @@
 <div class="sec-head"><h2>Live &amp; Upcoming <span>Tournaments</span></h2></div>
 <div class="cards3" id="home-tournaments"></div>
 <noscript><p class="muted">Tournament list loads from the site data. Enable JavaScript to view and apply.</p></noscript>
-<div class="split2">
+<div class="split2 eq">
 <div>
 <div class="sec-head"><h2>Tournament <span>Schedule</span></h2></div>
 <div class="sched-list" id="home-schedule"></div>
@@ -98,7 +98,7 @@
     return '<div class="sched-row"><span>'+E(t.name)+' &middot; '+E(t.dateText)+'</span><span class="chip">'+E(t.status)+'</span></div>';
   }).join('') || '<p class="empty">Schedule to be confirmed.</p>';
   document.getElementById('home-events').innerHTML=PZ.db.events.map(function(ev){
-    return '<div class="sched-row"><span>'+E(ev.title)+'</span><span class="muted">'+E(ev.dateText)+'</span></div>';
+    return '<div class="sched-row ev"><span>'+E(ev.title)+'</span><span class="muted">'+E(ev.dateText)+'</span></div>';
   }).join('') || '<p class="empty">No upcoming events yet.</p>';
 })();
 </script>

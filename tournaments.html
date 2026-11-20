@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20f">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20f"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -64,10 +64,10 @@
 (function(){
   var E=PZ.esc;
   document.getElementById('tourn-rows').innerHTML=PZ.db.tournaments.map(function(t){
-    return '<article class="t-row"><div class="ph poster-art"><span>Tournament Poster</span></div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode: '+E(t.mode)+'</p><p>Prize Pool: To be confirmed</p><p>Date: '+E(t.dateText)+'</p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
+    return '<article class="t-row"><div class="ph poster-art"><span>Tournament Poster</span></div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode <span class="mv">'+E(t.mode)+'</span></p><p>Prize Pool <span class="mv">To be confirmed</span></p><p>Date <span class="mv">'+E(t.dateText)+'</span></p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
   }).join('') || '<p class="empty">No tournaments yet. Tournaments added by the admin will appear here.</p>';
   document.getElementById('sched-body').innerHTML=PZ.db.tournaments.map(function(t){
-    return '<tr><td data-label="Date">'+E(t.dateText)+'</td><td data-label="Time">'+E(t.timeText||'Time to be confirmed')+'</td><td data-label="Event">'+E(t.name)+'</td><td data-label="Mode">'+E(t.mode)+'</td><td data-label="Status"><span class="chip">'+E(t.status)+'</span></td></tr>';
+    return '<tr><td data-label="Date">'+E(t.dateText)+'</td><td data-label="Time">'+E(t.timeText||'Time to be confirmed')+'</td><td data-label="Event">'+E(t.name)+'</td><td data-label="Mode">'+E(t.mode)+'</td><td data-label="Status"><span class="chip'+(t.status==='Registration Open'?' fill':'')+'">'+E(t.status)+'</span></td></tr>';
   }).join('') || '<tr><td data-label="Schedule" colspan="5">Schedule to be confirmed.</td></tr>';
 })();
 </script>

@@ -294,6 +294,49 @@ body.nav-open{overflow:hidden}
 .copyright{padding:8px 20px 20px}
 @media (max-width:760px){.footer-in{grid-template-columns:1fr 1fr;gap:18px}}
 
+/* ===== UI/UX round (Snow-approved analysis, 2026-11-20) ===== */
+.stats-strip span{font-size:14px;color:#c9c9cd}
+.step-card p,.why-card p,.faq-item p{font-size:15px;color:#c9c9cd}
+@media(min-width:1001px){.split2.eq{align-items:stretch}.auth-grid{grid-template-columns:.92fr 1.08fr}.dash-top{grid-template-columns:1.3fr 1fr;align-items:start}.footer-in{grid-template-columns:1.2fr 1fr 1fr 1.25fr}.admin-grid{display:flex;gap:22px;align-items:flex-start}}
+.split2.eq .sched-list{display:flex;flex-direction:column}
+.split2.eq .sched-row{flex:1;align-items:center}
+.team-photo{background:linear-gradient(180deg,#242428,#101012);border-color:#3a3a40;aspect-ratio:16/9}
+.team-photo::before{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:150px;height:78%;background:radial-gradient(ellipse 46px 34px at 50% 16%,#3c3c42 98%,transparent),linear-gradient(#33333a,#26262c);border-radius:70px 70px 12px 12px/90px 90px 12px 12px;opacity:.8}
+.team-photo::after{content:"";position:absolute;left:0;top:0;width:54px;height:5px;background:var(--red)}
+.poster-art::before{height:5px;background:var(--red);opacity:.9}
+.sched-row.ev{justify-content:flex-start;gap:18px}
+.cross{left:54px}
+@media(max-width:760px){.cross::after{left:-10px;width:46px}}
+.t-row p{color:#8f8f96;font-size:13.5px}
+.t-row p .mv{color:#e8e8ea;font-size:15px}
+.fact-line{display:flex;align-items:baseline;gap:12px}
+.fact-line b{flex:none}
+.chip.fill{background:var(--red);border-color:var(--red);color:#fff}
+@media(min-width:641px){.steps-grid.steps-3{grid-template-columns:repeat(3,1fr)}}
+.empty{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:26px;font-size:15.5px;color:#d7d7da}
+.content-card{padding:26px 30px;margin:0 auto}
+.content-card.about-card{max-width:1060px}
+.apply-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+input,select,textarea{background:#141417;border-color:#56565e}
+label.fl{color:#e6e6e9}
+.check{gap:12px;margin:18px 0;font-size:14.5px;color:#d7d7da}
+.check input{width:18px;height:18px;flex:none;margin:0}
+.dash-top .ph{aspect-ratio:16/9;min-height:0}
+.avatar-ph{font-size:17px;font-family:var(--head)}
+.code-in{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.admin-col{flex:1 1 0;display:flex;flex-direction:column;gap:22px;min-width:0}
+.admin-sec{margin:0}
+.chip-neutral{background:#26262a;border-color:#4a4a50;color:#e6e6e9}
+.admin-side a{border-left-color:transparent}
+.admin-side a.on{border-left-color:var(--red);background:#17171a;color:#fff}
+.mini-ph{width:104px;min-height:58px;font-size:9.5px}
+.gap-box{border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+.content-card h2{margin:34px 0 6px}
+.content-card h2:first-child{margin-top:0}
+.clause-index{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.clause-index a{color:#c9c9cd;font-size:14px}
+.clause-index a:hover{color:var(--red)}
+
 /* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
    Rules: content visible on load, entrance starts from visible, no scroll-reveal,
    animations are never gated on any motion preference setting. */

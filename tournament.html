@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20f">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20f"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -26,6 +26,7 @@
 <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')" aria-hidden="true"></div>
 <aside class="mobile-drawer" aria-label="Mobile navigation"><div class="drawer-head"><span>Menu</span><button class="drawer-close" type="button" aria-label="Close menu" onclick="document.body.classList.remove('nav-open')">&times;</button></div><nav class="drawer-nav" onclick="document.body.classList.remove('nav-open')"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html" data-admin-link>Admin</a></nav><div class="drawer-auth"><a class="btn btn-outline btn-block" href="auth.html?mode=login">Log In</a><a class="btn btn-red btn-block" href="auth.html">Sign Up</a><span class="user-chip" data-user-chip></span></div></aside>
 
+<div id="t-band"></div>
 <main class="wrap page-pad">
 <div id="t-main"></div>
 </main>
@@ -41,7 +42,7 @@
   var applied=squad&&PZ.db.applications.some(function(a){return a.squadId===squad.id&&a.tournamentId===t.id;});
   var assigned=squad&&PZ.isAssigned(squad.id,t.id);
   var room=user?PZ.roomFor(user,t.id):null;
-  var html='<div class="sec-head" style="margin-top:6px"><h2>'+E(t.name)+'</h2></div>'
+  var html=''
     +'<div class="split2"><div class="ph poster-art" style="min-height:260px"><span>Tournament Poster</span></div>'
     +'<section class="dash-card"><h3>Tournament Details</h3>'
     +'<p>Mode: '+E(t.mode)+'</p><p>Date: '+E(t.dateText)+'</p><p>Time: '+E(t.timeText||'Time to be confirmed')+'</p><p>Prize Pool: To be confirmed</p>'
@@ -49,7 +50,7 @@
     +'<p class="muted" style="margin-top:10px">Squad tournament for the PlayZyro PUBG community. Apply with your squad: a squad needs at least 4 members to apply.</p></section></div>'
     +'<div class="sec-head"><h2>About This <span>Tournament</span></h2></div><div class="content-card" style="max-width:none"><p>'+E(t.name)+' is listed in this demo preview as an example tournament. Its mode, date, time and status are shown above, and any detail that is not set yet reads as to be confirmed.</p><p>No result, prize or winner is claimed for this listing. Real tournament details are added by the admin.</p></div>'
     +'<div class="sec-head"><h2>How to <span>Apply</span></h2></div><div class="steps-grid steps-3"><div class="step-card"><p class="num">01</p><h3>Log in</h3><p>Log in to your PlayZyro account.</p></div><div class="step-card"><p class="num">02</p><h3>Have a squad of 4+</h3><p>Create a squad as captain, or join one with its join code.</p></div><div class="step-card"><p class="num">03</p><h3>Apply</h3><p>Apply below. The admin assigns squads, and the Room ID and password appear at match time.</p></div></div>'
-    +'<div class="sec-head"><h2>Apply for this <span>Tournament</span></h2></div><div class="content-card" style="max-width:none">';
+    +'<div class="sec-head"><h2>Apply for this <span>Tournament</span></h2></div><div class="content-card apply-card" style="max-width:none">';
   if(!user){
     html+='<p>You need an account and a squad to apply.</p><a class="btn btn-red" href="auth.html?next='+encodeURIComponent('tournament.html?id='+t.id)+'">Log In / Sign Up</a>';
   } else if(!squad){
@@ -73,6 +74,7 @@
   var appliedSquads=PZ.appliedSquadIds(t.id).map(function(sid){var s=PZ.db.squads.find(function(x){return x.id===sid;});return s?s.name:null;}).filter(Boolean);
   html+='<div class="sec-head"><h2>Squads <span>Applied</span></h2></div>';
   html+=appliedSquads.length?'<div class="sched-list">'+appliedSquads.map(function(n){return '<div class="sched-row"><span>'+E(n)+'</span></div>';}).join('')+'</div>':'<p class="empty">No squads have applied yet.</p>';
+  document.getElementById('t-band').innerHTML='<section class="band"><div class="cross"></div><div class="band-in"><h1>'+E(t.name)+'</h1><p>Tournament Details</p></div></section>';
   box.innerHTML=html;
   var btn=document.getElementById('apply-btn');
   if(btn){btn.addEventListener('click',function(){
