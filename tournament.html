@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -43,7 +43,7 @@
   var assigned=squad&&PZ.isAssigned(squad.id,t.id);
   var room=user?PZ.roomFor(user,t.id):null;
   var html=''
-    +'<div class="split2"><div class="ph poster-art" style="min-height:260px"><span>Tournament Poster</span></div>'
+    +'<div class="split2"><div class="ph poster-art has-art" style="min-height:260px"><img class="pz-art" src="assets/img/art-poster-a.jpg" alt=""><span>Tournament Poster</span></div>'
     +'<section class="dash-card"><h3>Tournament Details</h3>'
     +'<p>Mode: '+E(t.mode)+'</p><p>Date: '+E(t.dateText)+'</p><p>Time: '+E(t.timeText||'Time to be confirmed')+'</p><p>Prize Pool: To be confirmed</p>'
     +'<p>Status: <span class="chip">'+E(t.status)+'</span></p>'

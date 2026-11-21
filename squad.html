@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -37,7 +37,7 @@
   var squad=PZ.mySquad(user.id);
   var box=document.getElementById('squad-main');
   if(!squad){
-    box.innerHTML='<p class="empty">You are not in a squad yet.<br><br><a class="btn btn-red btn-sm" href="squad-create.html">Create Squad</a> &nbsp; <a class="btn btn-outline btn-sm" href="squad-join.html">Join Squad by Code</a></p>';
+    box.innerHTML='<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-helmet-s"/></svg><p class="empty">You are not in a squad yet.<br><br><a class="btn btn-red btn-sm" href="squad-create.html">Create Squad</a> &nbsp; <a class="btn btn-outline btn-sm" href="squad-join.html">Join Squad by Code</a></p>';
     return;
   }
   var captain=PZ.user(squad.captainId);
@@ -51,7 +51,7 @@
   box.innerHTML='<div class="split2"><section class="dash-card"><h3>'+E(squad.name)+'</h3>'+rows+slots
     +'<p class="join-code">Squad Join Code: <b>'+E(squad.joinCode)+'</b> <button class="btn btn-grey btn-sm" type="button" id="copy-code">Copy</button></p>'
     +'<p class="small muted" style="margin-top:8px">'+squad.memberIds.length+' of 5 members &middot; Captain: '+E(captain?captain.username:'')+'</p></section>'
-    +'<div class="ph team-photo"><span>Team Photo</span></div></div>'
+    +'<div class="ph team-photo has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span>Team Artwork</span></div></div>'
     +'<div class="sec-head"><h2>Squad <span>Tournaments</span></h2></div><div id="squad-tourns"></div>';
   document.getElementById('copy-code').addEventListener('click',function(){
     if(navigator.clipboard){navigator.clipboard.writeText(squad.joinCode);}
@@ -60,7 +60,7 @@
   var mine=PZ.myTournaments(user);
   document.getElementById('squad-tourns').innerHTML=mine.length?mine.map(function(t){
     return '<div class="my-row"><span class="grow">'+E(t.name)+'</span><span class="chip">'+E(t.status)+'</span><a class="btn btn-grey btn-sm" href="tournament.html?id='+E(t.id)+'">Details</a></div>';
-  }).join(''):'<p class="empty">This squad has not applied for a tournament yet. <a href="tournaments.html" style="text-decoration:underline">Browse tournaments</a>.</p>';
+  }).join(''):'<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-crate-s"/></svg><p class="empty">This squad has not applied for a tournament yet. <a href="tournaments.html" style="text-decoration:underline">Browse tournaments</a>.</p>';
 })();
 </script>
 <footer class="site-footer">

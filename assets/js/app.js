@@ -3,7 +3,7 @@
    tournaments and room credentials are created through the site's own flows.
    Mirrors the later WordPress tables: users, squads, tournaments, events,
    applications, assignments, rooms. */
-window.PZ_VERSION = '2026-11-20c';
+window.PZ_VERSION = '2026-11-20o';
 (function () {
   var V = window.PZ_VARIANT || 'vx';
   var KEY = 'pz_' + V + '_db_v1';
@@ -225,3 +225,6 @@ ready(function(){
   }
 });
 })();
+
+/* PUBG-look update: rotating tournament poster artwork (featured first, no adjacent repeats) */
+if (window.PZ) { PZ.posterFor = function (i) { return ['assets/img/art-poster-a.jpg','assets/img/art-poster-b.jpg','assets/img/art-hero.jpg'][((i||0)%3+3)%3]; }; }

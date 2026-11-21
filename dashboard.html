@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -39,11 +39,11 @@
 <div id="dash-room"></div>
 </section>
 <section class="dash-card" style="padding:10px">
-<div class="ph poster-art"><span>Tournament Poster</span></div>
+<div class="ph poster-art has-art"><img class="pz-art" src="assets/img/art-poster-a.jpg" alt=""><span>Tournament Poster</span></div>
 </section>
 <section class="dash-card">
 <h3>Latest Champion</h3>
-<div class="ph photo-frame" style="min-height:180px"><span>Winner Photo</span></div>
+<div class="ph photo-frame has-art" style="min-height:180px"><img class="pz-art" src="assets/img/art-champion.jpg" alt=""><span>Champion Artwork</span></div>
 <p class="small muted" style="margin-top:12px">Winner: To be confirmed</p>
 </section>
 </div>
@@ -64,7 +64,7 @@
       var role=(mid===squad.captainId)?'Captain':'Member 0'+i;
       return '<div class="member-row"><span class="avatar-ph">'+E(m.username.charAt(0).toUpperCase())+'</span><span class="role">'+E(role)+'</span><span class="muted small">'+E(m.username)+'</span></div>';
     }).join('');
-    sq.innerHTML='<div class="dash-squad-flex"><div class="roster">'+rows+'</div><div class="ph team-photo"><span>Team Photo</span></div></div>'
+    sq.innerHTML='<div class="dash-squad-flex"><div class="roster">'+rows+'</div><div class="ph team-photo has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span>Team Artwork</span></div></div>'
       +'<p class="join-code">Squad Join Code: <b>'+E(squad.joinCode)+'</b> <button class="btn btn-grey btn-sm" type="button" id="copy-code">Copy</button></p>'
       +'<p class="small muted" style="margin-top:8px">'+E(squad.name)+' &middot; '+squad.memberIds.length+' of 5 members &middot; Captain: '+E(captain?captain.username:'')+'</p>'
       +'<a class="btn btn-outline btn-sm" href="squad.html" style="margin-top:12px">View My Squad</a>';
@@ -73,7 +73,7 @@
       PZ.toast('Join code copied: '+squad.joinCode);
     });
   } else {
-    sq.innerHTML='<p class="muted">You are not in a squad yet.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a class="btn btn-red btn-sm" href="squad-create.html">Create Squad</a><a class="btn btn-outline btn-sm" href="squad-join.html">Join Squad by Code</a></div>';
+    sq.innerHTML='<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-backpack-s"/></svg><p class="muted">You are not in a squad yet.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a class="btn btn-red btn-sm" href="squad-create.html">Create Squad</a><a class="btn btn-outline btn-sm" href="squad-join.html">Join Squad by Code</a></div>';
   }
   var mine=PZ.myTournaments(user);
   var room=document.getElementById('dash-room');
@@ -89,7 +89,7 @@
   }
   var dt=document.getElementById('dash-tourns');
   if(!mine.length){
-    dt.innerHTML='<p class="empty">No tournaments yet. Browse tournaments and apply with your squad. <a class="btn btn-outline btn-sm" href="tournaments.html" style="margin-left:8px">Browse Tournaments</a></p>';
+    dt.innerHTML='<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-pin-s"/></svg><p class="empty">No tournaments yet. Browse tournaments and apply with your squad. <a class="btn btn-outline btn-sm" href="tournaments.html" style="margin-left:8px">Browse Tournaments</a></p>';
   } else {
     dt.innerHTML=mine.map(function(t){
       var st='Applied';

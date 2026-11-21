@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT = 'v5';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body class="has-edge">
 <header class="site-header">
@@ -46,10 +46,10 @@
 </table></div>
 <div class="sec-head"><h2>Highlights <span>&amp; Champions</span></h2></div>
 <div class="cards3" id="champ-grid">
-<div><div class="ph photo-frame"><span>Winner Photo</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Winner</b><span>To be confirmed</span></div></div></div>
-<div><div class="ph team-photo"><span>Team Photo</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Team name</b><span>To be confirmed</span></div></div></div>
-<div><div class="ph photo-frame"><span>Winner Photo</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Winner</b><span>To be confirmed</span></div></div></div>
-<div><div class="ph team-photo"><span>Team Photo</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Team name</b><span>To be confirmed</span></div></div></div>
+<div><div class="ph photo-frame has-art"><img class="pz-art" src="assets/img/art-champion.jpg" alt=""><span>Champion Artwork</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Winner</b><span>To be confirmed</span></div></div></div>
+<div><div class="ph team-photo has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span>Team Artwork</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Team name</b><span>To be confirmed</span></div></div></div>
+<div><div class="ph photo-frame has-art"><img class="pz-art" src="assets/img/art-champion.jpg" alt=""><span>Champion Artwork</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Winner</b><span>To be confirmed</span></div></div></div>
+<div><div class="ph team-photo has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span>Team Artwork</span></div><div class="fact-lines"><div class="fact-line"><b>Event</b><span>To be confirmed</span></div><div class="fact-line"><b>Team name</b><span>To be confirmed</span></div></div></div>
 </div>
 
 <div class="sec-head"><h2>How Squads <span>Work</span></h2></div>
@@ -64,8 +64,8 @@
 <script>
 (function(){
   var E=PZ.esc;
-  document.getElementById('tourn-rows').innerHTML=PZ.db.tournaments.map(function(t){
-    return '<article class="t-row"><div class="ph poster-art"><span>Tournament Poster</span></div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode <span class="mv">'+E(t.mode)+'</span></p><p>Prize Pool <span class="mv">To be confirmed</span></p><p>Date <span class="mv">'+E(t.dateText)+'</span></p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
+  document.getElementById('tourn-rows').innerHTML=PZ.db.tournaments.map(function(t,i){
+    return '<article class="t-row"><svg class="pz-corner" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-crosshair"/></svg><div class="ph poster-art has-art"><img class="pz-art" src="'+PZ.posterFor(i)+'" alt=""><span>Tournament Poster</span></div><div class="grow"><h3>'+E(t.name)+'</h3><p>Mode <span class="mv">'+E(t.mode)+'</span></p><p>Prize Pool <span class="mv">To be confirmed</span></p><p>Date <span class="mv">'+E(t.dateText)+'</span></p></div><a class="btn btn-red" href="tournament.html?id='+E(t.id)+'">Register Now</a></article>';
   }).join('') || '<p class="empty">No tournaments yet. Tournaments added by the admin will appear here.</p>';
   var sf=document.getElementById('sched-filter'), ss=document.getElementById('sched-search');
   var statuses=[]; PZ.db.tournaments.forEach(function(t){ if(statuses.indexOf(t.status)<0){statuses.push(t.status);} });
